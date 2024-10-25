@@ -1,0 +1,36 @@
+@import '../../styles/colors';
+
+.post-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+
+  &__image {
+    max-width: 50%;
+    max-height: 50%;
+    object-fit: cover;
+    border-radius: 24px;
+    margin-top: 20px;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__author {
+    color: $secondary-color;
+  }
+  
+  &__text {
+    width: 80%;
+  }
+}   
+
+@media (prefers-color-scheme: dark) {
+  .post-detail {
+    &__author {
+        color: $dark-theme-secondary-color;
+    }
+  }
+}

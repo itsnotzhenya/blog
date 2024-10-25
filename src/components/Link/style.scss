@@ -1,0 +1,48 @@
+@import '../../styles/colors';
+
+.custom-link {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: $primary-color;
+  
+  &__text {
+    margin: 0 0.5rem;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+
+    &.back-link {
+      transform: rotate(180deg);
+    }
+  }
+
+  &:hover {
+    color: $hover-color;
+
+    svg {
+      fill: $hover-color;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .custom-link {
+    color: $dark-theme-primary-color;
+
+    &__icon {
+      fill: $dark-theme-primary-color;
+    }
+
+    &:hover {
+      color: $dark-theme-hover-color;
+
+      svg {
+        fill: $dark-theme-hover-color;
+      }
+    }
+  }
+}
