@@ -4,14 +4,14 @@ import { usePostList } from './usePostList'
 import './style.scss'
 
 export const PostList: React.FC = memo(() => {
-  const { posts, status, currentPage, getAuthorName, handlePageChange } = usePostList()
+  const { posts, status, currentPage, error, getAuthorName, handlePageChange } = usePostList()
 
   if (status === 'loading') {
     return <div>Loading...</div>
   }
 
   if (status === 'failed') {
-    return <div>Error loading posts</div>
+    return <div>Error loading posts. {error && error}</div>
   }
 
   return(

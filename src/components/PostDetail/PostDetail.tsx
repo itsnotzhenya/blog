@@ -1,48 +1,18 @@
-import { useEffect, useState } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
-import { useAppSelector } from '../../store/store'
-import { Post } from '../../types'
-import * as api from '../../api/axios'
+import { memo } from 'react'
 import { CustomLink } from '../Link'
+import { usePostDetail } from './usePostDetail'
 import './style.scss'
 
-interface LocationState {
-  fromPage?: number
-}
+export const PostDetail: React.FC = memo(() => {
+  const { post, author, status, error, fromPage } = usePostDetail()
 
-export const PostDetail: React.FC = () => {
-  const location = useLocation()
-  const { fromPage = 1 } = (location.state as LocationState) || {}
-  const { id } = useParams<{ id: string }>()
-  const [ post, setPost ] = useState<Post | null>(null)
-  const [ loading, setLoading ] = useState(true)
-  const users = useAppSelector((state) => state.posts.users)
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        if (id) {
-          const data = await api.getPost(parseInt(id))
-          setPost(data)
-        }
-      } catch (error) {
-        console.error('Failed to fetch post:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchPost()
-  }, [ id ])
-
-  if (loading) {
+  if (status === 'loading') {
     return <div>Loading...</div>
   }
 
-  if (!post) {
-    return <div>Post not found</div>
+  if (!post || error) {
+    return <div>Post not found. {error}</div>
   }
-
-  const author = users.find((user) => user.id === post.userId)
 
   return (
     <div className="post-detail">
@@ -57,11 +27,12 @@ export const PostDetail: React.FC = () => {
         src={`https://picsum.photos/1500/1500.jpg?random=${post.id}`}
         alt={post.title}
         className="post-detail__image"
+        loading="lazy"
       />
       <h1 className="post-detail__title">{post.title}</h1>
       <p className="post-detail__author">By {author ? author.name : 'Unknown Author'}</p>
       <p className="post-detail__text">{post.body}</p>
     </div>
   )
-}
+})
 

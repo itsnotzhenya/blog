@@ -1,4 +1,4 @@
-@import '../../styles/colors';
+@use '../../styles/colors';
 
 .post-detail {
   display: flex;
@@ -19,7 +19,7 @@
   }
 
   &__author {
-    color: $secondary-color;
+    color: colors.$secondary-color;
   }
   
   &__text {
@@ -30,7 +30,7 @@
 @media (prefers-color-scheme: dark) {
   .post-detail {
     &__author {
-        color: $dark-theme-secondary-color;
+        color: colors.$dark-theme-secondary-color;
     }
   }
 }
