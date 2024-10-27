@@ -11,25 +11,27 @@ type PostCardProps = {
 
 export const PostCard = memo(({ id, title, author, currentPage }: PostCardProps) => {
   return (
-    <article className="post-list__card">
+    <article className="post-card">
       <img
         src={`https://picsum.photos/1500/1500.jpg?random=${id}`}
         alt={title}
-        className="post-list__image"
+        className="post-card__image"
+        loading="lazy"
       />
-      <div className="post-list__content">
+      <div className="post-card__content">
         <div>
-          <h2>{title}</h2>
-          <p className="author">By {author}</p>
+          <h2 className="post-card__title">{title}</h2>
+          <p className="post-card__author">By {author}</p>
         </div>
         <CustomLink
-          className="link"
+          className="post-card__link"
           to={`/post/${id}`}
           state={{ fromPage: currentPage }}
           iconType="forward"
         >
-                    Read More
+          Read More
         </CustomLink>
       </div>
-    </article>)
+    </article>
+  )
 })

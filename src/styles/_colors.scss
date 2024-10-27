@@ -1,11 +1,13 @@
+@use "sass:color";
+
 $primary-color: #333;
 $secondary-color: #666;
 $background-color: #f5f5f5;
 $card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-$hover-color: rgb(0, 56, 125);
+$hover-color: rgb(0, 99, 221);
 
 /* dark theme */
 $dark-theme-background-color: #333;
 $dark-theme-primary-color: #f5f5f5;
 $dark-theme-secondary-color: #eaeaea;
-$dark-theme-hover-color: lighten($hover-color, 50%);
+$dark-theme-hover-color: color.adjust($hover-color, $lightness: 20%);

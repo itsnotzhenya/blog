@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, LinkProps } from 'react-router-dom'
 import './style.scss'
 
-interface CustomLinkProps extends LinkProps {
+interface CustomLinkProps extends Omit<LinkProps, 'children'> {
   children: React.ReactNode;
   iconPosition?: 'left' | 'right';
   showIcon?: boolean;

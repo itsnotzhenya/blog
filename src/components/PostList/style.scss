@@ -1,12 +1,16 @@
-@import '../../styles/colors';
+@use "sass:color";
+@use '../../styles/colors';
 
-.post-list{
+.post-list {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .pagination {
@@ -18,17 +22,18 @@
   button {
     padding: 8px 16px;
     border: none;
-    background: $primary-color;
-    color: white;
+    background-color: #f9f9f9;
+    color: colors.$primary-color;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
     
     &:disabled {
       cursor: not-allowed;
     }
     
     &:hover:not(:disabled) {
-      background: darken($primary-color, 10%);
+      background-color: color.adjust(#f9f9f9, $lightness: -10%)
     }
   }
 }
@@ -36,8 +41,11 @@
 @media (prefers-color-scheme: dark) {
   .pagination {
     button {
+      background: colors.$primary-color;
+      color: white;
+
       &:hover:not(:disabled) {
-        background: lighten($primary-color, 10%);
+        background: color.adjust(colors.$primary-color, $lightness: 10%);
       }
     }
   }

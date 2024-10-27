@@ -1,32 +1,10 @@
-import { useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../store/store'
-import { fetchPosts, fetchUsers } from '../../store/postsSlice'
+import { memo } from 'react'
 import { PostCard } from '../PostCard'
+import { usePostList } from './usePostList'
 import './style.scss'
 
-export const PostList: React.FC = () => {
-  const dispatch = useAppDispatch()
-  const [ searchParams, setSearchParams ] = useSearchParams()
-  const { posts, users, currentPage, status } = useAppSelector((state) => state.posts)
-
-  useEffect(() => {
-    dispatch(fetchUsers())
-
-    const pageFromUrl = parseInt(searchParams.get('page') || '1')
-    dispatch(fetchPosts(pageFromUrl))
-  }, [ dispatch, searchParams ])
-
-  const getAuthorName = (userId: number): string => {
-    const user = users.find((user) => user.id === userId)
-    return user ? user.name : 'Unknown Author'
-  }
-
-  const handlePageChange = (page: number): void => {
-    // dispatch(fetchPosts(page));
-    setSearchParams({ page: page.toString() })
-    window.scrollTo(0, 0)
-  }
+export const PostList: React.FC = memo(() => {
+  const { posts, status, currentPage, getAuthorName, handlePageChange } = usePostList()
 
   if (status === 'loading') {
     return <div>Loading...</div>
@@ -55,14 +33,14 @@ export const PostList: React.FC = () => {
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
-                    Previous
+          <span>Previous</span>
         </button>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
         >
-                    Next
+          <span>Next</span>
         </button>
       </div>
     </div>
   )
-}
+})
