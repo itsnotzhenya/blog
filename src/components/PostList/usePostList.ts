@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import { fetchPosts } from '../../store/postsSlice'
@@ -24,15 +24,15 @@ export const usePostList = (): {
     dispatch(fetchUsers())
   }, [ dispatch, searchParams ])
 
-  const getAuthorName = (userId: number): string => {
+  const getAuthorName = useCallback((userId: number): string => {
     const user = users.find((user) => user.id === userId)
     return user ? user.name : 'Unknown Author'
-  }
+  }, [ users ])
 
-  const handlePageChange = (page: number): void => {
+  const handlePageChange = useCallback((page: number): void => {
     setSearchParams({ page: page.toString() })
     window.scrollTo(0, 0)
-  }
+  }, [ setSearchParams ])
 
   return { posts, status, currentPage, error, getAuthorName, handlePageChange }
 }
