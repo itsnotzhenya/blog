@@ -1,50 +1,53 @@
-# React + TypeScript + Vite
+# Blog Post Viewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
 
-Currently, two official plugins are available:
+This project is a simple blog post viewer application built with React and Redux Toolkit. It demonstrates skills in:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Working with layouts
+- UI design
+- State management
+- REST API integration
+- Attention to technical requirements
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Vite
+- React (Functional components)
+- Redux Toolkit
+- SCSS
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Home Page
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Displays a list of blog posts
+  - Post image
+  - Post title
+  - Author name
+  - Link to detailed view
+- Pagination (10 posts per page)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Detailed Post View
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Displays full post information
+  - Post image
+  - Post title
+  - Author name
+  - Post content
+
+## API Integration
+
+The application integrates with the following APIs:
+
+- Post list: GET `https://jsonplaceholder.typicode.com/posts?_limit=10&_page=1`
+- User list: GET `https://jsonplaceholder.typicode.com/users`
+- Single post: GET `https://jsonplaceholder.typicode.com/posts/<id>`
+- Single user: GET `https://jsonplaceholder.typicode.com/users/<id>`
+- Random image: SRC `https://picsum.photos/1500/1500.jpg`
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Run the development server: `npm run dev`
